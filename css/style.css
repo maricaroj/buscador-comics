@@ -1,0 +1,33 @@
+.titulo {
+  font-family: "Luckiest Guy", cursive;
+  font-size: 50px;
+  background-color: #d80000;
+}
+
+.img {
+  background-image: url("../img/banner.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.input-busq {
+  width: 600px;
+  outline: none;
+  border: 0;
+  border-radius: unset;
+  border-bottom: 2px solid black;
+  box-shadow: unset;
+  font-size: 25px;
+}
+
+.select-busq {
+  border: none;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.label-select {
+  color: grey;
+}
+
+/*# sourceMappingURL=style.css.map */

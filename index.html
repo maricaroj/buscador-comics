@@ -9,12 +9,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- LINKS -->
     <link rel="shortcut icon" href="./img/Marvel_icon-icons.com_61667.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
     <title>Marvel Comics</title>
 </head>
 <body>
+    <!-- HEADER -->
+    <header>
+        <nav class="navbar has-background-black is-justify-content-center">
+            <span class="has-text-centered py3 px-5 has-text-white titulo">ADA COMICS</span>
+        </nav>
+    </header>
+    <main>
+      <!-- BANNER -->
+        <section class="hero is-danger is-halfheight img">
+            <div class="hero-body"></div>
+        </section>
+        <!-- SECCION BUSQUEDA -->
+        <section class="container my-5">
+                <div class="column">
+                  <label for="ingresar-busqueda" class="label is-size-3">Búsqueda</label>
+                  <div class="columns">
+                      <div class="columns m-5 px-2 is-align-items-center">
+                        <input id="ingresar-busqueda" class="input mx-2 input-busq" type="text" placeholder="Ingresa tu búsqueda">
+                        <label for="tipo" class="label mx-5 label-select pt-2">TIPO</label>
+                        <div>
+                            <select id="tipo" class="select select-busq">
+                              <option>COMICS</option>
+                              <option>PERSONAJES</option>
+                            </select>
+                          </div>
+                          <label for="orden" class="label mx-5 label-select pt-2">ORDEN</label>
+                          <div>
+                            <select id="orden" class="select select-busq">
+                              <option>A/Z</option>
+                              <option>Z/A</option>
+                              <option>Más nuevos</option>
+                              <option>Más viejos</option>
+                            </select>
+                          </div>
+                        <button class="button is-black mx-6">BUSCAR</button>
+                    </div>
+                  </div>
+                </div>
+        </section>
+        <!-- SECCION COMICS -->
+        <section class="container mb-5">
+            <div id="root" class="columns is-flex-wrap-wrap"></div>
+        </section>
+        <!-- SECCION PAGINADOR -->
+        <section class="container is-flex is-justify-content-center my-6">
+            <button class="button button mr-3">
+                <i class="fas fa-caret-square-left is-size-4"></i>
+            </button>
+            <button class="button mr-2">
+                <i class="fas fa-caret-left is-size-4"></i>
+            </button>
+            <button class="button">
+                <i class="fas fa-caret-right is-size-4"></i>
+            </button>
+            <button class="button ml-3">
+                <i class="fas fa-caret-square-right is-size-4"></i>
+            </button>
+        </section>
+    </main>
+    <!-- FOOTER -->
+    <footer>
+        <nav class="navbar has-background-black is-justify-content-center is-align-items-center">
+            <span class="has-text-centered py3 px-5 has-text-white ">Hecho con 💖 por Silvi y Mari</span>
+        </nav>
+    </footer>
     
-
+    <script src="https://kit.fontawesome.com/348feffef2.js" crossorigin="anonymous"></script>
     <script src="./js/app.js"></script>
     <script src="./js/main.js"></script>
 </body>
