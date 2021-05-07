@@ -30,4 +30,23 @@
   color: grey;
 }
 
+.height_img {
+  height: 350px;
+  width: 230px;
+}
+
+a p {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+a:hover img {
+  transform: scale(1.02);
+  box-shadow: 5px 0px 3px rgba(0, 0, 0, 0.404);
+}
+a:hover p {
+  color: #0808ac;
+  transform: scale(1.03);
+}
+
 /*# sourceMappingURL=style.css.map */
