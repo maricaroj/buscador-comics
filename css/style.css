@@ -49,4 +49,8 @@ a:hover p {
   transform: scale(1.03);
 }
 
+.img-comic-info {
+  box-shadow: 5px 0px 3px rgba(0, 0, 0, 0.404);
+}
+
 /*# sourceMappingURL=style.css.map */

@@ -8,13 +8,25 @@ const timestamp = Date.now();  //da miliseegundos de donde se hace la llamada
 const hash = md5(timestamp + private + public);
 
 
+const totalResult = document.getElementById('total-result');
+
 //General Request
 const fetchData = () =>{
-const url = `http://gateway.marvel.com/v1/public/comics?ts=${timestamp}&apikey=${public}&hash=${hash}`
-fetch(url)
- .then(response => response.json())
- .then(obj => printData(obj.data.results))
- .catch(response =>console.error(response))
-}
+    const url = `https://gateway.marvel.com/v1/public/comics?ts=${timestamp}&apikey=${public}&hash=${hash}`
+    fetch(url)
+    .then(response => response.json())
+    .then(obj => {
+        printData(obj.data.results)
+        totalResult.innerHTML = obj.data.total
+    })
+    .catch(response =>console.error(response))
+};
 
 fetchData();
+
+const getId = (id) =>{
+    const url = `https://gateway.marvel.com/v1/public/comics/${id}?ts=${timestamp}&apikey=${public}&hash=${hash}`
+    fetch(url)
+    .then(response => response.json())
+    .then(obj => printInfoComic(obj.data.results))
+};
