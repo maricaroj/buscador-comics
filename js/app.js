@@ -16,6 +16,7 @@ const fetchData = () =>{
     fetch(url)
     .then(response => response.json())
     .then(obj => {
+        console.log(obj);
         printData(obj.data.results)
         totalResult.innerHTML = obj.data.total
     })
@@ -24,9 +25,21 @@ const fetchData = () =>{
 
 fetchData();
 
+let comicId = '';
 const getId = (id) =>{
     const url = `https://gateway.marvel.com/v1/public/comics/${id}?ts=${timestamp}&apikey=${public}&hash=${hash}`
     fetch(url)
     .then(response => response.json())
     .then(obj => printInfoComic(obj.data.results))
+    comicId = id
+    getComicIdCharacter(comicId)
+    return comicId
 };
+
+const getComicIdCharacter = (id) =>{
+    const url = `https://gateway.marvel.com/v1/public/comics/${id}/characters?ts=${timestamp}&apikey=${public}&hash=${hash}`
+    fetch(url)
+    .then(response => response.json())
+    .then(obj => printCharactersComic(obj.data.results))
+};
+

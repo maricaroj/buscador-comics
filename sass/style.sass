@@ -3,7 +3,7 @@
   font-size: 50px
   background-color: rgb(216, 0, 0)
 
-.img
+.img-banner
   background-image: url('../img/banner.jpg')
   background-position: center
   background-size: cover
@@ -46,3 +46,28 @@ a
 
 .img-comic-info
   box-shadow: 5px 0px 3px rgba(0, 0, 0, 0.404)
+
+.img-comic-character-card
+  width: 190px
+  height: 350px
+  background-color: black
+  box-shadow: 3px 0px 3px rgba(0, 0, 0, 0.404)
+  overflow: hidden
+  transition: 0.4s linear
+  .img-comic-character
+    width: 190px
+    height: 200px
+    border-bottom: 5px solid rgb(216, 0, 0)
+    transition: 0.4s linear
+  figcaption
+    color: rgb(196, 190, 190)
+  &:hover
+    background-color: rgb(216, 0, 0)
+    box-shadow: 3px 0px 3px rgba(0, 0, 0, 0.555)
+    border-radius: 10px
+    
+    img
+      transform: scale(1.05)
+      
+   
+
