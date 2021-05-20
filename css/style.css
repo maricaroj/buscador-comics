@@ -4,7 +4,7 @@
   background-color: #d80000;
 }
 
-.img {
+.img-banner {
   background-image: url("../img/banner.jpg");
   background-position: center;
   background-size: cover;
@@ -47,6 +47,36 @@ a:hover img {
 a:hover p {
   color: #0808ac;
   transform: scale(1.03);
+}
+
+.img-comic-info {
+  box-shadow: 5px 0px 3px rgba(0, 0, 0, 0.404);
+}
+
+.img-comic-character-card {
+  width: 190px;
+  height: 350px;
+  background-color: black;
+  box-shadow: 3px 0px 3px rgba(0, 0, 0, 0.404);
+  overflow: hidden;
+  transition: 0.4s linear;
+}
+.img-comic-character-card .img-comic-character {
+  width: 190px;
+  height: 200px;
+  border-bottom: 5px solid #d80000;
+  transition: 0.4s linear;
+}
+.img-comic-character-card figcaption {
+  color: #c4bebe;
+}
+.img-comic-character-card:hover {
+  background-color: #d80000;
+  box-shadow: 3px 0px 3px rgba(0, 0, 0, 0.555);
+  border-radius: 10px;
+}
+.img-comic-character-card:hover img {
+  transform: scale(1.05);
 }
 
 /*# sourceMappingURL=style.css.map */
