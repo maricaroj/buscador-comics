@@ -47,27 +47,57 @@ a
 .img-comic-info
   box-shadow: 5px 0px 3px rgba(0, 0, 0, 0.404)
 
-.img-comic-character-card
+
+.card-character
+  display: block
+  position: relative
+  margin: 0
+  overflow: hidden
   width: 190px
   height: 350px
   background-color: black
   box-shadow: 3px 0px 3px rgba(0, 0, 0, 0.404)
-  overflow: hidden
-  transition: 0.4s linear
-  .img-comic-character
-    width: 190px
-    height: 200px
-    border-bottom: 5px solid rgb(216, 0, 0)
-    transition: 0.4s linear
-  figcaption
-    color: rgb(196, 190, 190)
-  &:hover
-    background-color: rgb(216, 0, 0)
-    box-shadow: 3px 0px 3px rgba(0, 0, 0, 0.555)
-    border-radius: 10px
-    
-    img
-      transform: scale(1.05)
-      
-   
+  transition: 0.5s ease-in-out
+  -webkit-transition: 0.5s ease-in-out
+  border-bottom-right-radius: 34.5px
 
+  >.red
+    display: block
+    position: absolute
+    overflow: hidden
+    left: 0
+    top: 0
+    width: 100%
+    height: 0%
+    transition: 0.5s ease-in-out
+    -webkit-transition: 0.5s ease-in-out
+
+.img-comic-character
+  display: block
+  position: absolute
+  z-index: 2
+  width: 190px
+  height: 200px
+  border-bottom: 5px solid #d80000
+  transition: 0.75s ease-in-out
+  -webkit-transition: 0.75s ease-in-out
+
+.name
+  display: block
+  text-align: center
+  color: rgb(196, 190, 190)
+  position: relative
+  top: 220px
+  font-family: Verdana, Geneva, Tahoma, sans-serif
+  font-weight: bold
+
+.card-character:hover
+  box-shadow: 3px 0px 3px rgba(0, 0, 0, 0.555)
+  cursor: pointer
+
+  img
+    transform: scale(1.05)
+
+  > .red
+    background: #d80000
+    height: 100%
