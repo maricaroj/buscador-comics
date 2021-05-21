@@ -42,7 +42,7 @@ a p {
 }
 a:hover img {
   transform: scale(1.02);
-  box-shadow: 5px 0px 3px rgba(0, 0, 0, 0.404);
+  box-shadow: 7px 0px 3px rgba(0, 0, 0, 0.404);
 }
 a:hover p {
   color: #0808ac;
