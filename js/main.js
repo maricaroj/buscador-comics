@@ -78,14 +78,16 @@ const printCharactersComic = arr => {
                 <h3 class="title mb-2">Personajes</h3>
                 <p class="is-size-6 has-text-weight-bold has-text-grey mt-0">${arr.length} Resultado(s)</p>`
         box += `<div class="column is-one-fifth">
-                        <figure class="img-comic-character-card">
-                            <img src="${path === pathNonFoundNowanted ? pathNonFoundWanted : path}.${extension}" alt="${name}" class="img-comic-character">
-                            <figcaption class="is-size-5 has-text-weight-bold has-text-centered mt-1 p-3">${name}</figcaption>
-                        </figure>
-                    
+                    <div class="card-character" data-title="Character">
+                        <img src="${path === pathNonFoundNowanted ? pathNonFoundWanted : path}.${extension}" alt="${name}" class="img-comic-character">
+                        <span class="red"></span>
+                        <p class="name is-size-5 has-text-weight-bold has-text-centered mt-1 p-3">${name}</p>
+                    </div>
                 </div> `
     })
 
   comicCharactersInfo.innerHTML = box
 
 }
+    
+        
