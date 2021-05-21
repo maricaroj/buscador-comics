@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="has-background-grey-lighter">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,7 +24,7 @@
     </header>
     <main>
       <!-- BANNER -->
-        <section class="hero is-danger is-halfheight img">
+        <section class="hero is-danger is-halfheight img-banner">
             <div class="hero-body"></div>
         </section>
         <!-- SECCION BUSQUEDA -->
@@ -53,11 +53,20 @@
                         <button class="button is-black mx-6">BUSCAR</button>
                     </div>
                   </div>
+
                 </div>
         </section>
         <!-- SECCION COMICS -->
-        <section class="container mb-5">
+        <section id="container-comics" class="container mb-5">
+            <h2 class="subtitle has-text-weight-bold mb-2">Resultados</h2>
+            <p class="mb-5 has-text-weight-bold has-text-grey"><span id="total-result">0</span> resultados</p>
             <div id="main-container" class="columns is-flex-wrap-wrap"></div>
+        </section>
+        <section id="container-comic-info" class="container mb-5 is-hidden">
+            <div id="comic-info" class="p-6"></div>
+            <div id="comic-characters-results" class="p-6"></div>
+            <div id="comic-characters-info" class="columns is-flex is-flex-wrap-wrap px-6 pt-0"></div>
+
         </section>
         <!-- SECCION PAGINADOR -->
         <section class="container is-flex is-justify-content-center my-6">
