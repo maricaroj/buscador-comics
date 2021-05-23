@@ -11,15 +11,23 @@ const hash = md5(timestamp + private + public);
 const totalResult = document.getElementById('total-result');
 
 //General Request
+
+let offset = 0;
+let total = 0;
+
 const fetchData = () =>{
-    const url = `https://gateway.marvel.com/v1/public/comics?ts=${timestamp}&apikey=${public}&hash=${hash}`
+    const url = `https://gateway.marvel.com/v1/public/comics?limit=20&offset=20&ts=${timestamp}&apikey=${public}&hash=${hash}`
     fetch(url)
     .then(response => response.json())
     .then(obj => {
         printData(obj.data.results)
-        totalResult.innerHTML = obj.data.total
+        console.log(obj.data.results);
+        total = obj.data.total
+        totalResult.innerHTML = total
     })
     .catch(response =>console.error(response))
+
+    return total
 };
 
 fetchData();
@@ -65,3 +73,66 @@ const getComicsCharacterId = (id) =>{
     .then(obj => printComicsCharacter(obj.data.results))
     .catch(err => console.error(err))
 };
+
+// Pagination
+
+const firstBtn = document.getElementById('first-page-btn');
+const previewsBtn = document.getElementById('previews-page-btn');
+const nextBtn = document.getElementById('next-page-btn');
+const lastBtn = document.getElementById('last-page-btn');
+
+const firstPage = () =>{
+    enableBtn();
+    offset = 0;
+    disabledBtn();
+    fetchData();
+    return offset
+};
+
+const previewsPage = () =>{
+    enableBtn();
+    offset -= 20;
+    disabledBtn();
+    fetchData();
+    return offset
+};
+
+const nextPage = () =>{
+    enableBtn();
+    offset += 20;
+    disabledBtn();
+    fetchData();
+    return offset
+};
+
+const lastPage = () =>{
+    enableBtn()
+    offset = total - 20
+    disabledBtn();
+    fetchData();
+    return offset
+}
+
+const disabledBtn = () =>{
+    if(offset === 0 ){
+        firstBtn.disabled = true;
+        previewsBtn.disabled = true;
+    }
+    if(offset === total -20){
+        nextBtn.disabled = true;
+        lastBtn.disabled = true;
+    }
+};
+
+const enableBtn = () =>{
+    if(firstBtn.disabled || previewsBtn.disabled){
+        firstBtn.disabled = false;
+        previewsBtn.disabled = false;
+    }
+    if(nextBtn.disabled || lastBtn.disabled){
+        nextBtn.disabled = false;
+        lastBtn.disabled = false;
+    }
+};
+
+disabledBtn();
