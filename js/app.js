@@ -16,7 +16,7 @@ let offset = 0;
 let total = 0;
 
 const fetchData = () =>{
-    const url = `https://gateway.marvel.com/v1/public/comics?limit=20&offset=20&ts=${timestamp}&apikey=${public}&hash=${hash}`
+    const url = `https://gateway.marvel.com/v1/public/comics?limit=20&offset=${offset}&ts=${timestamp}&apikey=${public}&hash=${hash}`
     fetch(url)
     .then(response => response.json())
     .then(obj => {
@@ -80,12 +80,15 @@ const firstBtn = document.getElementById('first-page-btn');
 const previewsBtn = document.getElementById('previews-page-btn');
 const nextBtn = document.getElementById('next-page-btn');
 const lastBtn = document.getElementById('last-page-btn');
+const pageNumber = document.getElementById('page-number');
 
+pageNumber.innerHTML = 1
 const firstPage = () =>{
     enableBtn();
     offset = 0;
     disabledBtn();
     fetchData();
+    pageNumber.innerHTML = 1
     return offset
 };
 
@@ -94,6 +97,7 @@ const previewsPage = () =>{
     offset -= 20;
     disabledBtn();
     fetchData();
+    pageNumber.innerHTML = Math.floor(offset / 20) + 1
     return offset
 };
 
@@ -102,6 +106,7 @@ const nextPage = () =>{
     offset += 20;
     disabledBtn();
     fetchData();
+    pageNumber.innerHTML = Math.floor(offset / 20) + 1
     return offset
 };
 
@@ -110,6 +115,7 @@ const lastPage = () =>{
     offset = total - 20
     disabledBtn();
     fetchData();
+    pageNumber.innerHTML = Math.floor(offset / 20) + 1
     return offset
 }
 
