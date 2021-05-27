@@ -9,7 +9,19 @@ const containerCharacterInfo = document.getElementById('container-character-info
 const characterInfo = document.getElementById('character-info');
 const characterComicsInfo = document.getElementById('character-comics-info');
 const characterComicsResults = document.getElementById('character-comics-results');
+const lightButton = document.getElementById('light-button');
+const darkButton = document.getElementById('dark-button');
 
+lightButton.addEventListener('click', ()=>{
+    lightButton.classList.add('is-hidden');
+    darkButton.classList.remove('is-hidden');
+    document.body.classList.add('theme--dark');
+});
+darkButton.addEventListener('click', ()=>{
+    lightButton.classList.remove('is-hidden');
+    darkButton.classList.add('is-hidden');
+    document.body.classList.remove('theme--dark');
+});
 
 const printData = arr => {
     let box = '';
@@ -50,13 +62,13 @@ const printInfoComic = arr => {
                 <img src="${path === pathNonFoundNowanted ? pathNonFoundWanted : path}.${extension}" alt="${title}" class="img-comic-info">
                 </figure>
             </div>
-            <div class="column is-size-5 px-6 py-4">
-                <h3 class="title">${title}</h3>
-                <h4 class="subtitle has-text-weight-bold m-0 mb-2">Publicado:</h4>
+            <div class="column is-size-5 px-6 py-4 label-select">
+                <h3 class="title title-color">${title}</h3>
+                <h4 class="has-text-weight-bold m-0 mb-2">Publicado:</h4>
                 <p>${releaseDate}</p>
-                <h4 class="subtitle has-text-weight-bold m-0 mt-3 mb-2">Guionistas:</h4>
+                <h4 class="has-text-weight-bold m-0 mt-3 mb-2">Guionistas:</h4>
                 <p>${writer ? writer : 'Sin información'}</p>
-                <h4 class="subtitle has-text-weight-bold m-0 mt-3 mb-2">Descripción:</h4>
+                <h4 class="has-text-weight-bold m-0 mt-3 mb-2">Descripción:</h4>
                 <p class="has-text-justified pr-6">${description ? description : 'Sin información'}</p>
             </div>
         </div>`
@@ -67,9 +79,9 @@ const printInfoComic = arr => {
 const printCharactersComic = arr => {
     if(arr.length === 0){
         comicCharactersResults.innerHTML = `
-            <h3 class="title mb-2">Personajes</h3>
-            <p class="is-size-6 has-text-weight-bold has-text-grey mt-0">${arr.length} Resultado(s)</p>
-            <p class="subtitle has-text-weight-bold mt-6">No se han encontrado resultados</p>`
+            <h3 class="title mb-2 title-color">Personajes</h3>
+            <p class="is-size-6 has-text-weight-bold mt-0">${arr.length} Resultado(s)</p>
+            <p class="subtitle has-text-weight-bold mt-6 title-color">No se han encontrado resultados</p>`
     }
     let box = '';
     arr.forEach(character => {
@@ -78,8 +90,8 @@ const printCharactersComic = arr => {
         const pathNonFoundWanted = "https://i.pinimg.com/564x/6d/af/a0/6dafa08555ee450d9d61061c7bc23cb5";
        
         comicCharactersResults.innerHTML = `
-                <h3 class="title mb-2">Personajes</h3>
-                <p class="is-size-6 has-text-weight-bold has-text-grey mt-0">${arr.length} Resultado(s)</p>`
+                <h3 class="title mb-2 title-color">Personajes</h3>
+                <p class="is-size-6 has-text-weight-bold mt-0">${arr.length} Resultado(s)</p>`
         box += `<div class="column is-one-fifth" onclick="getCharacterId(${id})">
                     <div class="card-character" data-title="Character" >
                         <img src="${path === pathNonFoundNowanted ? pathNonFoundWanted : path}.${extension}" alt="${name}" class="img-comic-character">
@@ -107,9 +119,9 @@ const printInfoCharater = (arr) =>{
                 <img src="${path === pathNonFoundNowanted ? pathNonFoundWanted : path}.${extension}" alt="${name}" class="img-comic-info">
                 </figure>
             </div>
-            <div class="column is-size-5 px-6 py-4">
-                <h3 class="title">${name}</h3>
-                <h4 class="subtitle has-text-weight-bold m-0 mt-3 mb-2">Descripción:</h4>
+            <div class="column is-size-5 px-6 py-4 label-select">
+                <h3 class="title title-color">${name}</h3>
+                <h4 class="has-text-weight-bold m-0 mt-3 mb-2">Descripción:</h4>
                 <p class="has-text-justified pr-6">${description ? description : 'Sin información'}</p>
             </div>
         </div>`
@@ -118,13 +130,13 @@ const printInfoCharater = (arr) =>{
 
     if(arr[0].comics.available == 0){
         characterComicsResults.innerHTML = `
-            <h3 class="title mb-2">Comics</h3>
-            <p class="is-size-6 has-text-weight-bold has-text-grey mt-0">${arr[0].comics.available} Resultado(s)</p>
-            <p class="subtitle has-text-weight-bold mt-6">No se han encontrado resultados</p>`
+            <h3 class="title mb-2 title-color">Comics</h3>
+            <p class="is-size-6 has-text-weight-bold mt-0 label-select">${arr[0].comics.available} Resultado(s)</p>
+            <p class="subtitle has-text-weight-bold mt-6 title-color">No se han encontrado resultados</p>`
     } else{
         characterComicsResults.innerHTML = `
-        <h3 class="title mb-2">Comics</h3>
-        <p class="is-size-6 has-text-weight-bold has-text-grey mt-0">${arr[0].comics.available} Resultado(s)</p>`
+        <h3 class="title mb-2 title-color">Comics</h3>
+        <p class="is-size-6 has-text-weight-bold mt-0 label-select">${arr[0].comics.available} Resultado(s)</p>`
     }
 };
         

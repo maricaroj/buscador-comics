@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="has-background-grey-lighter">
+<html lang="en" class="theme">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,7 +30,7 @@
         <!-- SECCION BUSQUEDA -->
         <section class="container my-5">
                 <div class="column">
-                  <label for="ingresar-busqueda" class="label is-size-3">Búsqueda</label>
+                  <label for="ingresar-busqueda" class="label is-size-3 title-color">Búsqueda</label>
                   <div class="columns">
                       <div class="columns m-5 px-2 is-align-items-center">
                         <input id="ingresar-busqueda" class="input mx-2 input-busq" type="text" placeholder="Ingresa tu búsqueda">
@@ -50,7 +50,9 @@
                               <option>Más viejos</option>
                             </select>
                           </div>
-                        <button class="button is-black mx-6">BUSCAR</button>
+                        <button class="button mx-6 btn-search">BUSCAR</button>
+                        <button class="btn-icon" id="light-button" aria-label="Cambiar a Modo Oscuro"><img src="./img/01-icono-sol.png" alt="sol" class="icons"></button>
+                        <button class="btn-icon is-hidden" id="dark-button" aria-label="Cambiar a Modo Claro"> <img src="./img/02-icono-luna.png" alt="luna" class="icons"></button>
                     </div>
                   </div>
 
@@ -58,7 +60,7 @@
         </section>
         <!-- SECCION COMICS -->
         <section id="container-comics" class="container mb-5">
-            <h2 class="subtitle has-text-weight-bold mb-2">Resultados</h2>
+            <h2 class="subtitle has-text-weight-bold mb-2 title-color">Resultados</h2>
             <p class="mb-5 has-text-weight-bold has-text-grey"><span id="total-result">0</span> resultados</p>
             <div id="main-container" class="columns is-flex-wrap-wrap"></div>
         </section>
