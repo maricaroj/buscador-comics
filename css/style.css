@@ -1,3 +1,24 @@
+.theme {
+  --backgroundColor: #e9e7e7;
+  --fontColorPpal: #242323;
+  --fontColorSecond: #9e9d9d;
+  --hoverFontColor: #13139e;
+}
+.theme--dark {
+  --backgroundColor: #242323;
+  --fontColorPpal: #adabab;
+  --fontColorSecond: #9e9d9d;
+  --hoverFontColor: #6c6cff;
+}
+
+body {
+  background-color: var(--backgroundColor);
+}
+
+.title-color {
+  color: var(--fontColorPpal);
+}
+
 .titulo {
   font-family: "Luckiest Guy", cursive;
   font-size: 50px;
@@ -27,7 +48,29 @@
 }
 
 .label-select {
-  color: grey;
+  color: var(--fontColorSecond);
+}
+
+.btn-search {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+}
+
+.btn-icon {
+  background-color: transparent;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 1px 1.5px 0px black;
+}
+.btn-icon .icons {
+  height: 40px;
+  width: 45px;
+  padding: 2px;
+  filter: drop-shadow(1px 1px 0px black);
+}
+.btn-icon:hover {
+  background-color: #969090;
 }
 
 .height_img {
@@ -37,15 +80,15 @@
 
 a p {
   text-decoration: none;
-  color: black;
+  color: var(--fontColorPpal);
   font-weight: bold;
 }
 a:hover img {
   transform: scale(1.02);
-  box-shadow: 7px 0px 3px rgba(0, 0, 0, 0.404);
+  box-shadow: 5px 0px 3px rgba(0, 0, 0, 0.404);
 }
 a:hover p {
-  color: #0808ac;
+  color: var(--hoverFontColor);
   transform: scale(1.03);
 }
 

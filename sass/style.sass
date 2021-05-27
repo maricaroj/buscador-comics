@@ -1,3 +1,22 @@
+@import './_var'
+
+.theme 
+  --backgroundColor: #{$backgroundColor}
+  --fontColorPpal: #{$fontColorPpal}
+  --fontColorSecond: #{$fontColorSecond}
+  --hoverFontColor: #{$hoverFontColor}
+  &--dark
+    --backgroundColor: #{$backgroundColor--dark}
+    --fontColorPpal: #{$fontColorPpal--dark}
+    --fontColorSecond: #{$fontColorSecond--dark}
+    --hoverFontColor: #{$hoverFontColor--dark}
+
+body
+  background-color: var(--backgroundColor)
+
+.title-color
+  color: var(--fontColorPpal)
+
 .titulo
   font-family: 'Luckiest Guy', cursive
   font-size: 50px
@@ -23,7 +42,27 @@
   font-size: 15px
 
 .label-select
-  color: grey
+  color: var(--fontColorSecond)
+
+.btn-search
+  background-color: rgb(0, 0, 0)
+  color: rgb(255, 255, 255)
+  font-weight: bold
+
+.btn-icon
+  background-color: transparent
+  border: none
+  border-radius: 50px
+  box-shadow: 1px 1.5px 0px black
+  
+  .icons
+    height: 40px
+    width: 45px
+    padding: 2px
+    filter: drop-shadow(1px 1px 0px black)
+ 
+  &:hover
+    background-color: rgb(150, 144, 144)
 
 .height_img
   height: 350px
@@ -32,7 +71,7 @@
 a
   p
     text-decoration: none
-    color: black
+    color: var(--fontColorPpal)
     font-weight: bold
 
   &:hover
@@ -41,7 +80,7 @@ a
       box-shadow: 5px 0px 3px rgba(0, 0, 0, 0.404)
 
     p
-      color: rgb(8, 8, 172)
+      color: var(--hoverFontColor)
       transform: scale(1.03)
 
 .img-comic-info
@@ -78,7 +117,7 @@ a
   z-index: 2
   width: 190px
   height: 200px
-  border-bottom: 5px solid #d80000
+  border-bottom: 5px solid rgb(216, 0, 0)
   transition: 0.75s ease-in-out
   -webkit-transition: 0.75s ease-in-out
 
@@ -99,5 +138,5 @@ a
     transform: scale(1.05)
 
   > .red
-    background: #d80000
+    background: rgb(216, 0, 0)
     height: 100%
