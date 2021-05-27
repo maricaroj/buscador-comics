@@ -97,7 +97,7 @@ const printInfoCharater = (arr) =>{
     containerCharacterInfo.classList.remove('is-hidden');
     let box = '';
     arr.forEach(character => {
-        const {name, thumbnail: {extension, path}, description, comics : {available}} = character;
+        const {name, thumbnail: {extension, path}, description} = character;
         const pathNonFoundNowanted = "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available";
         const pathNonFoundWanted = "https://i.pinimg.com/564x/6d/af/a0/6dafa08555ee450d9d61061c7bc23cb5";
         box += `
