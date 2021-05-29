@@ -1,27 +1,42 @@
 //Key
 const private ='dfe8cb22eeb11d19206ec91e1d9bae2f9db5f51b'
-
 const public = '67067bc7995973198c01b6d156e12ab1'
-
 const timestamp = Date.now();  //da miliseegundos de donde se hace la llamada
-
 const hash = md5(timestamp + private + public);
-
-
 const totalResult = document.getElementById('total-result');
 
-//General Request
+//Print General view
+const containerComics = document.getElementById('container-comics');
+const mainContainer = document.getElementById('main-container');
+const containerComicInfo = document.getElementById('container-comic-info');
+const comicInfo = document.getElementById('comic-info');
+const comicCharactersInfo = document.getElementById('comic-characters-info');
+const comicCharactersResults = document.getElementById('comic-characters-results');
+const containerCharacterInfo = document.getElementById('container-character-info');
+const characterInfo = document.getElementById('character-info');
+const characterComicsInfo = document.getElementById('character-comics-info');
+const characterComicsResults = document.getElementById('character-comics-results');
+const lightButton = document.getElementById('light-button');
+const darkButton = document.getElementById('dark-button');
 
+//Search-Nav
+const searchInput = document.getElementById('search-input'); 
+const searchType = document.getElementById('search-type'); 
+const searchOrder = document.getElementById('search-order'); 
+const searchBtn = document.getElementById('search-btn');
+
+//General Request
 let offset = 0;
 let total = 0;
 
-const fetchData = () =>{
-    const url = `https://gateway.marvel.com/v1/public/comics?limit=20&offset=${offset}&ts=${timestamp}&apikey=${public}&hash=${hash}`
+
+
+url = `https://gateway.marvel.com/v1/public/comics?limit=20&offset=${offset}&ts=${timestamp}&apikey=${public}&hash=${hash}`
+const fetchData = (url) =>{
     fetch(url)
     .then(response => response.json())
     .then(obj => {
         printData(obj.data.results)
-        console.log(obj.data.results);
         total = obj.data.total
         totalResult.innerHTML = total
     })
@@ -30,7 +45,7 @@ const fetchData = () =>{
     return total
 };
 
-fetchData();
+fetchData(url);
 
 //Comics
 let comicId = '';
@@ -49,7 +64,7 @@ const getCharacterComicId = (id) =>{
     const url = `https://gateway.marvel.com/v1/public/comics/${id}/characters?ts=${timestamp}&apikey=${public}&hash=${hash}`
     fetch(url)
     .then(response => response.json())
-    .then(obj => printCharactersComic(obj.data.results))
+    .then(obj => printCharactersComic(obj.data.results, comicCharactersResults, comicCharactersInfo ))
     .catch(err => console.error(err))
 };
 
@@ -74,8 +89,41 @@ const getComicsCharacterId = (id) =>{
     .catch(err => console.error(err))
 };
 
-// Pagination
 
+//Search-Nav
+
+const fetchCharacters = (input) =>{
+   const url = `https://gateway.marvel.com/v1/public/characters?nameStartsWith=${input}&limit=20&offset=${offset}&ts=${timestamp}&apikey=${public}&hash=${hash}`
+    fetch(url)
+    .then(response => response.json())
+    .then(obj => {
+        printCharactersComic(obj.data.results, '' ,mainContainer)
+        total = obj.data.total
+        totalResult.innerHTML = total})
+    .catch(err => console.error(err))
+};
+
+const searchURLUpdate = () =>{
+    const input = searchInput.value
+    const type = searchType.value
+    let url2 = ''
+    if(type === 'comics'){
+        url2 = `https://gateway.marvel.com/v1/public/${type}?title=${input}&limit=20&offset=${offset}&ts=${timestamp}&apikey=${public}&hash=${hash}`
+        fetchData(url2)
+        
+    }
+    if(type === 'characters'){
+        fetchCharacters(input)
+    }
+}
+
+  
+searchBtn.addEventListener('click', searchURLUpdate);
+
+
+
+
+// Pagination
 const firstBtn = document.getElementById('first-page-btn');
 const previewsBtn = document.getElementById('previews-page-btn');
 const nextBtn = document.getElementById('next-page-btn');
@@ -142,3 +190,5 @@ const enableBtn = () =>{
 };
 
 disabledBtn();
+
+

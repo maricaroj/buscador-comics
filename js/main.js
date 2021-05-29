@@ -1,16 +1,4 @@
-//Print General view
-const containerComics = document.getElementById('container-comics');
-const mainContainer = document.getElementById('main-container');
-const containerComicInfo = document.getElementById('container-comic-info');
-const comicInfo = document.getElementById('comic-info');
-const comicCharactersInfo = document.getElementById('comic-characters-info');
-const comicCharactersResults = document.getElementById('comic-characters-results');
-const containerCharacterInfo = document.getElementById('container-character-info');
-const characterInfo = document.getElementById('character-info');
-const characterComicsInfo = document.getElementById('character-comics-info');
-const characterComicsResults = document.getElementById('character-comics-results');
-const lightButton = document.getElementById('light-button');
-const darkButton = document.getElementById('dark-button');
+
 
 lightButton.addEventListener('click', ()=>{
     lightButton.classList.add('is-hidden');
@@ -76,9 +64,10 @@ const printInfoComic = arr => {
   comicInfo.innerHTML = box
 };
 
-const printCharactersComic = arr => {
+
+const printCharactersComic = (arr, containerText, container) => {
     if(arr.length === 0){
-        comicCharactersResults.innerHTML = `
+        containerText.innerHTML = `
             <h3 class="title mb-2 title-color">Personajes</h3>
             <p class="is-size-6 has-text-weight-bold mt-0">${arr.length} Resultado(s)</p>
             <p class="subtitle has-text-weight-bold mt-6 title-color">No se han encontrado resultados</p>`
@@ -89,7 +78,7 @@ const printCharactersComic = arr => {
         const pathNonFoundNowanted = "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available";
         const pathNonFoundWanted = "https://i.pinimg.com/564x/6d/af/a0/6dafa08555ee450d9d61061c7bc23cb5";
        
-        comicCharactersResults.innerHTML = `
+        containerText.innerHTML = `
                 <h3 class="title mb-2 title-color">Personajes</h3>
                 <p class="is-size-6 has-text-weight-bold mt-0">${arr.length} Resultado(s)</p>`
         box += `<div class="column is-one-fifth" onclick="getCharacterId(${id})">
@@ -100,7 +89,7 @@ const printCharactersComic = arr => {
                     </div>
                 </div> `
     });
-  comicCharactersInfo.innerHTML = box
+  container.innerHTML = box
 };
     
 const printInfoCharater = (arr) =>{
