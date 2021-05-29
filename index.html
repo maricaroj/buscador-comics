@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="theme">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,6 +16,7 @@
     <link rel="stylesheet" href="./css/style.css">
     <title>Marvel Comics</title>
 </head>
+
 <body>
     <!-- HEADER -->
     <header>
@@ -23,40 +25,43 @@
         </nav>
     </header>
     <main>
-      <!-- BANNER -->
+        <!-- BANNER -->
         <section class="hero is-danger is-halfheight img-banner">
             <div class="hero-body"></div>
         </section>
         <!-- SECCION BUSQUEDA -->
         <section class="container my-5">
-                <div class="column">
-                  <label for="ingresar-busqueda" class="label is-size-3 title-color">Búsqueda</label>
-                  <div class="columns">
-                      <div class="columns m-5 px-2 is-align-items-center">
-                        <input id="ingresar-busqueda" class="input mx-2 input-busq" type="text" placeholder="Ingresa tu búsqueda">
-                        <label for="tipo" class="label mx-5 label-select pt-2">TIPO</label>
+            <div class="column">
+                <label for="search-input" class="label is-size-3 title-color">Búsqueda</label>
+                <div class="columns">
+                    <div class="columns m-5 px-2 is-align-items-center">
+                        <input id="search-input" class="input mx-2 input-busq" type="text"
+                            placeholder="Ingresa tu búsqueda">
+                        <label for="search-type" class="label mx-5 label-select pt-2">TIPO</label>
                         <div>
-                            <select id="tipo" class="select select-busq">
-                              <option>COMICS</option>
-                              <option>PERSONAJES</option>
+                            <select id="search-type" class="select select-busq">
+                                <option value="comics">COMICS</option>
+                                <option value="characters">PERSONAJES</option>
                             </select>
-                          </div>
-                          <label for="orden" class="label mx-5 label-select pt-2">ORDEN</label>
-                          <div>
-                            <select id="orden" class="select select-busq">
-                              <option>A/Z</option>
-                              <option>Z/A</option>
-                              <option>Más nuevos</option>
-                              <option>Más viejos</option>
+                        </div>
+                        <label for="search-order" class="label mx-5 label-select pt-2">ORDEN</label>
+                        <div>
+                            <select id="search-order" class="select select-busq">
+                                <option value='title'>A/Z</option>
+                                <option value='-title'>Z/A</option>
+                                <option value='-focDate'>Más nuevos</option>
+                                <option value='focDate'>Más viejos</option>
                             </select>
-                          </div>
-                        <button class="button mx-6 btn-search">BUSCAR</button>
-                        <button class="btn-icon" id="light-button" aria-label="Cambiar a Modo Oscuro"><img src="./img/01-icono-sol.png" alt="sol" class="icons"></button>
-                        <button class="btn-icon is-hidden" id="dark-button" aria-label="Cambiar a Modo Claro"> <img src="./img/02-icono-luna.png" alt="luna" class="icons"></button>
+                        </div>
+                        <button id="search-btn" class="button mx-6 btn-search">BUSCAR</button>
+                        <button class="btn-icon" id="light-button" aria-label="Cambiar a Modo Oscuro"><img
+                                src="./img/01-icono-sol.png" alt="sol" class="icons"></button>
+                        <button class="btn-icon is-hidden" id="dark-button" aria-label="Cambiar a Modo Claro"> <img
+                                src="./img/02-icono-luna.png" alt="luna" class="icons"></button>
                     </div>
-                  </div>
-
                 </div>
+
+            </div>
         </section>
         <!-- SECCION COMICS -->
         <section id="container-comics" class="container mb-5">
@@ -99,11 +104,14 @@
             <span class="has-text-centered py3 px-5 has-text-white ">Hecho con 💖 por Silvi y Mari</span>
         </nav>
     </footer>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.18.0/js/md5.min.js" integrity="sha512-Hmp6qDy9imQmd15Ds1WQJ3uoyGCUz5myyr5ijainC1z+tP7wuXcze5ZZR3dF7+rkRALfNy7jcfgS5hH8wJ/2dQ==" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.18.0/js/md5.min.js"
+        integrity="sha512-Hmp6qDy9imQmd15Ds1WQJ3uoyGCUz5myyr5ijainC1z+tP7wuXcze5ZZR3dF7+rkRALfNy7jcfgS5hH8wJ/2dQ=="
+        crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/348feffef2.js" crossorigin="anonymous"></script>
     <script src="./js/app.js"></script>
     <script src="./js/main.js"></script>
 
 </body>
+
 </html>
