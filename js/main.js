@@ -18,7 +18,7 @@ const printData = arr => {
         const pathNonFoundNowanted = "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available";
         const pathNonFoundWanted = "https://i.pinimg.com/564x/6d/af/a0/6dafa08555ee450d9d61061c7bc23cb5";
         box += `
-        <div class="column is-one-fifth" onclick="getId(${id})">
+        <div class="column is-one-fifth" onclick="getId(${id});pagination(getId)">
             <figure>
                 <a>
                     <img class="height_img" src="${path === pathNonFoundNowanted ? pathNonFoundWanted : path}.${extension}" alt="${title}">
@@ -81,7 +81,7 @@ const printCharactersComic = (arr, containerText, container) => {
         containerText.innerHTML = `
                 <h3 class="title mb-2 title-color">Personajes</h3>
                 <p class="is-size-6 has-text-weight-bold mt-0">${arr.length} Resultado(s)</p>`
-        box += `<div class="column is-one-fifth" onclick="getCharacterId(${id})">
+        box += `<div class="column is-one-fifth" onclick="getCharacterId(${id}); pagination(getCharacterId)">
                     <div class="card-character" data-title="Character" >
                         <img src="${path === pathNonFoundNowanted ? pathNonFoundWanted : path}.${extension}" alt="${name}" class="img-comic-character">
                         <span class="red"></span>
