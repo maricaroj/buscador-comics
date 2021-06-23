@@ -25,13 +25,24 @@ const searchType = document.getElementById('search-type');
 const searchOrder = document.getElementById('search-order');
 const searchBtn = document.getElementById('search-btn');
 
+// Pagination
+const containerPagination = document.getElementById('container-pagination');
+let pageNumber = 1
+
+
 //General Request
 let offset = 0;
-let total = 0;
+let total;
+let order = searchOrder.value;
+let input = searchInput.value;
 
-
-const fetchData = () => {
-    let url = `https://gateway.marvel.com/v1/public/comics?&limit=20&offset=${offset}&ts=${timestamp}&apikey=${public}&hash=${hash}`
+const fetchData = (input, order) => {
+    let url;
+    if(input !== ''){
+        url = `https://gateway.marvel.com/v1/public/comics?titleStartsWith=${input}&orderBy=${order}&limit=20&offset=${offset}&ts=${timestamp}&apikey=${public}&hash=${hash}`
+    } else{
+        url = `https://gateway.marvel.com/v1/public/comics?&orderBy=${order}&limit=20&offset=${offset}&ts=${timestamp}&apikey=${public}&hash=${hash}`
+    }
     fetch(url)
         .then(response => response.json())
         .then(obj => {
@@ -50,11 +61,15 @@ const getId = (id) => {
     const url = `https://gateway.marvel.com/v1/public/comics/${id}?&limit=20&offset=${offset}&ts=${timestamp}&apikey=${public}&hash=${hash}`
     fetch(url)
         .then(response => response.json())
-        .then(obj => printInfoComic(obj.data.results))
+        .then(obj => {
+            printInfoComic(obj.data.results)
+            total = obj.data.total;
+        })
         .catch(err => console.error(err))
     comicId = id
+    pageNumber = 1;
     getCharacterComicId(comicId)
-    return comicId
+    return [comicId, total]
 };
 
 const getCharacterComicId = (id) => {
@@ -71,11 +86,15 @@ const getCharacterId = (id) => {
     const url = `https://gateway.marvel.com/v1/public/characters/${id}?&limit=20&offset=${offset}&ts=${timestamp}&apikey=${public}&hash=${hash}`
     fetch(url)
         .then(response => response.json())
-        .then(obj => printInfoCharater(obj.data.results))
+        .then(obj => {
+            printInfoCharater(obj.data.results)
+            total = obj.data.results[0].comics.available;
+        })
         .catch(err => console.error(err))
     characterId = id
+    pageNumber = 1;
     getComicsCharacterId(characterId)
-    return characterId
+    return [characterId, total]
 };
 
 const getComicsCharacterId = (id) => {
@@ -104,14 +123,9 @@ const searchURLUpdate = () => {
     const input = searchInput.value
     const type = searchType.value
     const order = searchOrder.value
-    let url2 = ''
-    if (type === 'comics' && input != '') {
-        url2 = `https://gateway.marvel.com/v1/public/${type}?titleStartsWith=${input}&orderBy=${order}&limit=20&offset=${offset}&ts=${timestamp}&apikey=${public}&hash=${hash}`
-        fetchData(url2)
-    }
-    if (type === 'comics' && input === '') {
-        url = `https://gateway.marvel.com/v1/public/comics?&orderBy=${order}&limit=20&offset=${offset}&ts=${timestamp}&apikey=${public}&hash=${hash}`
-        fetchData(url)
+    if (type === 'comics') {
+        // url2 = `https://gateway.marvel.com/v1/public/${type}?titleStartsWith=${input}&orderBy=${order}&limit=20&offset=${offset}&ts=${timestamp}&apikey=${public}&hash=${hash}`
+        fetchData(input, order)
     }
     if (type === 'characters' && input != '') {
         const url3 = `https://gateway.marvel.com/v1/public/characters?nameStartsWith=${input}&orderBy=${order}&limit=20&offset=${offset}&ts=${timestamp}&apikey=${public}&hash=${hash}`
@@ -121,6 +135,8 @@ const searchURLUpdate = () => {
         const url4 = `https://gateway.marvel.com/v1/public/characters?&orderBy=${order}&limit=20&offset=${offset}&ts=${timestamp}&apikey=${public}&hash=${hash}`
         fetchCharacters(url4)
     };
+    offset = 0;
+    pageNumber = 1;
 
 }
 
@@ -144,133 +160,40 @@ searchType.addEventListener('change', () => {
 })
 
 
+// // Pagination
 
+const firstPage = (func) => {
+    offset = 0;
+    func();
+    pageNumber  = 1
+    return offset
+};
 
+const previewsPage = (func) => {
+    offset -= 20;
+    func();
+    pageNumber = Math.floor(offset / 20) + 1
+    return offset
+};
 
-// Pagination
-const firstBtn = document.getElementById('first-page-btn');
-const previewsBtn = document.getElementById('previews-page-btn');
-const nextBtn = document.getElementById('next-page-btn');
-const lastBtn = document.getElementById('last-page-btn');
-const pageNumber = document.getElementById('page-number');
+const nextPage = (func) => {
+    offset += 20;
+    func();
+    pageNumber = Math.floor(offset / 20) + 1
+    return offset
+};
 
-pageNumber.innerHTML = 1
-
-const pagination = (callback) => {
-    console.log(callback);
-    console.log(offset);
-    firstBtn.onclick = () =>{
-        enableBtn();
-        offset = 0;
-        disabledBtn();
-        callback();
-        pageNumber.innerHTML = 1
-        return offset
-    }
-    previewsBtn.onclick = () => {
-        enableBtn();
-        offset -= 20;
-        disabledBtn();
-        callback();
-        pageNumber.innerHTML = Math.floor(offset / 20) + 1
-        return offset
-    }
-    nextBtn.onclick = () => {
-        console.log(offset);
-        enableBtn();
-        offset += 20;
-        disabledBtn();
-        callback();
-        pageNumber.innerHTML = Math.floor(offset / 20) + 1
-        return offset
-    }
-    lastBtn.onclick = () => {
-        enableBtn()
-        // const isExact = total % 20 === 0
-        // const pages = Math.floor(total / 20)
-        // offset = (isExact ? pages - 1 : pages) * 20
-        offset = total - (total % 20)
-        disabledBtn();
-        callback();
-        pageNumber.innerHTML = Math.floor(offset / 20) + 1
-        return offset
-    }
-
+const lastPage = (func) => {
+    const isExact = total % 20 === 0
+    const pages = Math.floor(total / 20)
+    offset = (isExact ? pages - 1 : pages) * 20
+    offset = total - (total % 20)
+    func();
+    pageNumber  = Math.floor(offset / 20) + 1
+    return offset
 }
-
-
-
-// const firstPage = () => {
-//     enableBtn();
-//     offset = 0;
-//     disabledBtn();
-//     fetch(url);
-//     pageNumber.innerHTML = 1
-//     return offset
-// };
-
-// const previewsPage = () => {
-//     enableBtn();
-//     offset -= 20;
-//     disabledBtn();
-//     fetch(url);
-//     pageNumber.innerHTML = Math.floor(offset / 20) + 1
-//     return offset
-// };
-
-// const nextPage = () => {
-//     enableBtn();
-//     offset += 20;
-//     disabledBtn();
-//     fetch(url);
-//     pageNumber.innerHTML = Math.floor(offset / 20) + 1
-//     return offset
-// };
-
-// const lastPage = () => {
-//     enableBtn()
-//     offset = total - 20
-//     disabledBtn();
-//     fetch(url);
-//     pageNumber.innerHTML = Math.floor(offset / 20) + 1
-//     return offset
-// }
-
-const checkBtn = () => {
-    offset <= 0 ? firstBtn.disabled = true : firstBtn.disabled = false;
-    offset <= 0 ? previewsBtn.disabled = true : previewsBtn.disabled = false;
-
-    offset === total - (total % 20) ? nextBtn.disabled = true : nextBtn.disabled = false;
-    offset === total - (total % 20) ? lastBtn.disabled = true : lastBtn.disabled = false;
-}
-// const disabledBtn = () => {
-//     if (offset === 0) {
-//         firstBtn.disabled = true;
-//         previewsBtn.disabled = true;
-//     }
-//     if (offset === total - 20) {
-//         nextBtn.disabled = true;
-//         lastBtn.disabled = true;
-//     }
-// };
-
-// const enableBtn = () => {
-//     if (firstBtn.disabled || previewsBtn.disabled) {
-//         firstBtn.disabled = false;
-//         previewsBtn.disabled = false;
-//     }
-//     if (nextBtn.disabled || lastBtn.disabled) {
-//         nextBtn.disabled = false;
-//         lastBtn.disabled = false;
-//     }
-// };
 
 
 window.onload = () => {
-    fetchData();
-    disabledBtn();
-    pagination(fetchData)
+    fetchData(input, order);
 }
-
-
-

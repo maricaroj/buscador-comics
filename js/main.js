@@ -18,7 +18,7 @@ const printData = arr => {
         const pathNonFoundNowanted = "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available";
         const pathNonFoundWanted = "https://i.pinimg.com/564x/6d/af/a0/6dafa08555ee450d9d61061c7bc23cb5";
         box += `
-        <div class="column is-one-fifth" onclick="getId(${id});pagination(getId)">
+        <div class="column is-one-fifth" onclick="getId(${id})">
             <figure>
                 <a>
                     <img class="height_img" src="${path === pathNonFoundNowanted ? pathNonFoundWanted : path}.${extension}" alt="${title}">
@@ -28,6 +28,23 @@ const printData = arr => {
         </div>`  
     });
     mainContainer.innerHTML = box
+    containerPagination.innerHTML = `
+            <button id="first-page-btn" class="button button mr-3 is-primary" ${offset === 0 && 'disabled'} onclick="firstPage(${() => fetchData(input, order)})">
+                <i class="fas fa-caret-square-left is-size-4"></i>
+            </button>
+            <button id="previews-page-btn" class="button mr-2" ${offset === 0 && 'disabled'} onclick="previewsPage(${() => fetchData(input, order)})">
+                <i class="fas fa-caret-left is-size-4"></i>
+            </button>
+            <div class="button mr-2">
+                <span id="page-number">${pageNumber}</span>
+            </div>
+            <button id="next-page-btn" class="button" ${offset === total - (total % 20) && 'disabled'} onclick="nextPage(${() => fetchData(input, order)})">
+                <i class="fas fa-caret-right is-size-4"></i>
+            </button>
+            <button id="last-page-btn" class="button ml-3" ${offset === total - (total % 20) && 'disabled'} onclick="lastPage(${() => fetchData(input, order)})">
+                <i class="fas fa-caret-square-right is-size-4"></i>
+            </button>
+    `
 };
 
 const printInfoComic = arr => {
@@ -50,7 +67,7 @@ const printInfoComic = arr => {
                 <img src="${path === pathNonFoundNowanted ? pathNonFoundWanted : path}.${extension}" alt="${title}" class="img-comic-info">
                 </figure>
             </div>
-            <div class="column is-size-5 px-6 py-4 label-select">
+            <div class="column is-size-5 px-6 py-4 title-color">
                 <h3 class="title title-color">${title}</h3>
                 <h4 class="has-text-weight-bold m-0 mb-2">Publicado:</h4>
                 <p>${releaseDate}</p>
@@ -81,7 +98,7 @@ const printCharactersComic = (arr, containerText, container) => {
         containerText.innerHTML = `
                 <h3 class="title mb-2 title-color">Personajes</h3>
                 <p class="is-size-6 has-text-weight-bold mt-0">${arr.length} Resultado(s)</p>`
-        box += `<div class="column is-one-fifth" onclick="getCharacterId(${id}); pagination(getCharacterId)">
+        box += `<div class="column is-one-fifth" onclick="getCharacterId(${id})">
                     <div class="card-character" data-title="Character" >
                         <img src="${path === pathNonFoundNowanted ? pathNonFoundWanted : path}.${extension}" alt="${name}" class="img-comic-character">
                         <span class="red"></span>
@@ -89,7 +106,24 @@ const printCharactersComic = (arr, containerText, container) => {
                     </div>
                 </div> `
     });
-  container.innerHTML = box
+    container.innerHTML = box
+    containerPagination.innerHTML = `
+            <button id="first-page-btn" class="button button mr-3 is-danger" ${offset === 0 && 'disabled'} onclick="firstPage(${() => getCharacterComicId(comicId)})">
+                <i class="fas fa-caret-square-left is-size-4"></i>
+            </button>
+            <button id="previews-page-btn" class="button mr-2" ${offset === 0 && 'disabled'} onclick="previewsPage(${() =>  getCharacterComicId(comicId)})">
+                <i class="fas fa-caret-left is-size-4"></i>
+            </button>
+            <div class="button mr-2">
+                <span id="page-number">${pageNumber}</span>
+            </div>
+            <button id="next-page-btn" class="button" ${offset === total - (total % 20) && 'disabled'} onclick="nextPage(${() =>  getCharacterComicId(comicId)})">
+                <i class="fas fa-caret-right is-size-4"></i>
+            </button>
+            <button id="last-page-btn" class="button ml-3" ${offset === total - (total % 20) && 'disabled'} onclick="lastPage(${() =>  getCharacterComicId(comicId)})">
+                <i class="fas fa-caret-square-right is-size-4"></i>
+            </button>
+    `
 };
     
 const printInfoCharater = (arr) =>{
@@ -146,6 +180,22 @@ const printComicsCharacter = arr => {
             </figure>
         </div>`  
     })
-
   characterComicsInfo.innerHTML = box
+  containerPagination.innerHTML = `
+  <button id="first-page-btn" class="button button mr-3 is-warning" ${offset === 0 && 'disabled'} onclick="firstPage(${() => getCharacterId(characterId)})">
+                <i class="fas fa-caret-square-left is-size-4"></i>
+            </button>
+            <button id="previews-page-btn" class="button mr-2" ${offset === 0 && 'disabled'} onclick="previewsPage(${() =>  getCharacterId(characterId)})">
+                <i class="fas fa-caret-left is-size-4"></i>
+            </button>
+            <div class="button mr-2">
+                <span id="page-number">${pageNumber}</span>
+            </div>
+            <button id="next-page-btn" class="button" ${offset === total - (total % 20) && 'disabled'} onclick="nextPage(${() =>  getCharacterId(characterId)})">
+                <i class="fas fa-caret-right is-size-4"></i>
+            </button>
+            <button id="last-page-btn" class="button ml-3" ${offset === total - (total % 20) && 'disabled'} onclick="lastPage(${() =>  getCharacterId(characterId)})">
+                <i class="fas fa-caret-square-right is-size-4"></i>
+            </button>
+    `
 };
