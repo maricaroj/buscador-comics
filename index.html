@@ -30,37 +30,38 @@
             <div class="hero-body"></div>
         </section>
         <!-- SECCION BUSQUEDA -->
-        <section class="container my-5">
+        <section class="container my-5 ">
             <div class="column">
-                <label for="search-input" class="label is-size-3 title-color">Búsqueda</label>
-                <div class="columns">
-                    <div class="columns m-5 px-2 is-align-items-center">
-                        <input id="search-input" class="input mx-2 input-busq" type="text"
+                <div class="columns is-justify-content-space-between is-mobile mx-5">
+                    <label for="search-input" class="label is-size-3 title-color">Búsqueda</label>
+                    <button class="btn-icon" id="light-button" aria-label="Cambiar a Modo Oscuro"><img
+                        src="./img/01-icono-sol.png" alt="sol" class="icons"></button>
+                    <button class="btn-icon is-hidden" id="dark-button" aria-label="Cambiar a Modo Claro"> <img
+                        src="./img/02-icono-luna.png" alt="luna" class="icons"></button>
+                </div>
+                <div class="columns  is-flex">
+                    <div class="columns m-5 px-2 is-align-items-center is-flex-wrap-wrap">
+                        <input id="search-input" class="input mx-2 input-busq mb-5" type="text"
                             placeholder="Ingresa tu búsqueda">
-                        <label for="search-type" class="label mx-5 label-select pt-2">TIPO</label>
+                        <label for="search-type" class="label mx-3 label-select pt-2 mb-5">TIPO</label>
                         <div>
-                            <select id="search-type" class="select select-busq">
+                            <select id="search-type" class="select select-busq mb-5 mx-2">
                                 <option value="comics">COMICS</option>
                                 <option value="characters">PERSONAJES</option>
                             </select>
                         </div>
-                        <label for="search-order" class="label mx-5 label-select pt-2">ORDEN</label>
+                        <label for="search-order" class="label mx-3 label-select pt-2 mb-5">ORDEN</label>
                         <div>
-                            <select id="search-order" class="select select-busq">
+                            <select id="search-order" class="select select-busq mb-5 mx-2">
                                 <option value='title'>A/Z</option>
                                 <option value='-title'>Z/A</option>
                                 <option value='-focDate'>Más nuevos</option>
                                 <option value='focDate'>Más viejos</option>
                             </select>
                         </div>
-                        <button id="search-btn" class="button mx-6 btn-search">BUSCAR</button>
-                        <button class="btn-icon" id="light-button" aria-label="Cambiar a Modo Oscuro"><img
-                                src="./img/01-icono-sol.png" alt="sol" class="icons"></button>
-                        <button class="btn-icon is-hidden" id="dark-button" aria-label="Cambiar a Modo Claro"> <img
-                                src="./img/02-icono-luna.png" alt="luna" class="icons"></button>
+                        <button id="search-btn" class="button mx-2 btn-search mb-5">BUSCAR</button>
                     </div>
                 </div>
-
             </div>
         </section>
         <!-- SECCION COMICS -->

@@ -25,7 +25,7 @@ const printData = (arr) => {
       "https://i.pinimg.com/564x/6d/af/a0/6dafa08555ee450d9d61061c7bc23cb5";
     box += `
         <div class="column is-one-fifth" onclick="getId(${id})">
-            <figure>
+            <figure >
                 <a>
                     <img class="height_img" src="${
                       path === pathNonFoundNowanted ? pathNonFoundWanted : path

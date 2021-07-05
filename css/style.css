@@ -32,7 +32,7 @@ body {
 }
 
 .input-busq {
-  width: 600px;
+  width: 650px;
   outline: none;
   border: 0;
   border-radius: unset;
@@ -63,11 +63,12 @@ body {
   border: none;
   border-radius: 50px;
   box-shadow: 1px 1.5px 0px black;
+  width: 75px;
+  height: 45px;
 }
 .btn-icon .icons {
-  height: 40px;
-  width: 45px;
-  padding: 2px;
+  height: 35px;
+  width: 40px;
   filter: drop-shadow(1px 1px 0px black);
 }
 .btn-icon:hover {
@@ -153,6 +154,12 @@ a:hover p {
 .card-character:hover > .red {
   background: #d80000;
   height: 100%;
+}
+
+@media (max-width: 680px) {
+  .input-busq {
+    width: 100%;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
