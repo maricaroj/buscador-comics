@@ -6,22 +6,19 @@ const hash = md5(timestamp + private + public);
 const totalResult = document.getElementById("total-result");
 
 //Print General view
+const contanierSpinner = document.getElementById("container-spinner");
+const contanierSpinner2 = document.getElementById("container-spinner-2");
+const contanierSpinner3 = document.getElementById("container-spinner-3");
 const containerComics = document.getElementById("container-comics");
 const mainContainer = document.getElementById("main-container");
 const containerComicInfo = document.getElementById("container-comic-info");
 const comicInfo = document.getElementById("comic-info");
 const comicCharactersInfo = document.getElementById("comic-characters-info");
-const comicCharactersResults = document.getElementById(
-  "comic-characters-results"
-);
-const containerCharacterInfo = document.getElementById(
-  "container-character-info"
-);
+const comicCharactersResults = document.getElementById("comic-characters-results");
+const containerCharacterInfo = document.getElementById("container-character-info");
 const characterInfo = document.getElementById("character-info");
 const characterComicsInfo = document.getElementById("character-comics-info");
-const characterComicsResults = document.getElementById(
-  "character-comics-results"
-);
+const characterComicsResults = document.getElementById("character-comics-results");
 const lightButton = document.getElementById("light-button");
 const darkButton = document.getElementById("dark-button");
 
@@ -45,6 +42,8 @@ let type = searchType.value;
 // General search of comics and characters
 
 const fetchData = (input, order) => {
+  contanierSpinner.classList.remove('is-hidden');
+  mainContainer.classList.add('is-hidden')
   total = undefined;
   let url;
   if (input !== "") {
@@ -58,11 +57,14 @@ const fetchData = (input, order) => {
       printData(obj.data.results);
       total = obj.data.total;
       totalResult.innerHTML = total;
+      contanierSpinner.classList.add("is-hidden");
     })
     .catch((err) => console.error(err));
 };
 
 const fetchCharacters = (input, order) => {
+  contanierSpinner.classList.remove('is-hidden');
+  mainContainer.classList.add('is-hidden');
   total = undefined;
 
   let url;
@@ -77,6 +79,8 @@ const fetchCharacters = (input, order) => {
       printCharactersComic(obj.data.results, "", mainContainer);
       total = obj.data.total;
       totalResult.innerHTML = total;
+      contanierSpinner.classList.add("is-hidden");
+
     })
     .catch((err) => console.error(err));
 };
@@ -101,16 +105,19 @@ const getId = (id) => {
 };
 
 const getCharacterComicId = (id) => {
+  contanierSpinner3.classList.remove("is-hidden");
+  offset = 0;
   const url = `https://gateway.marvel.com/v1/public/comics/${id}/characters?&limit=20&offset=${offset}&ts=${timestamp}&apikey=${public}&hash=${hash}`;
   fetch(url)
     .then((response) => response.json())
-    .then((obj) =>
+    .then((obj) => {
       printCharactersComic(
         obj.data.results,
         comicCharactersResults,
         comicCharactersInfo
-      )
-    )
+      );
+      contanierSpinner3.classList.add("is-hidden");
+    })
     .catch((err) => console.error(err));
 };
 
@@ -134,15 +141,23 @@ const getCharacterId = (id) => {
 };
 
 const getComicsCharacterId = (id) => {
+  characterComicsInfo.classList.add("is-hidden");
+  contanierSpinner2.classList.remove("is-hidden");
   const url = `https://gateway.marvel.com/v1/public/characters/${id}/comics?&limit=20&offset=${offset}&ts=${timestamp}&apikey=${public}&hash=${hash}`;
   fetch(url)
     .then((response) => response.json())
-    .then((obj) => printComicsCharacter(obj.data.results))
+    .then((obj) => {
+      printComicsCharacter(obj.data.results);
+      contanierSpinner2.classList.add("is-hidden");
+    })
     .catch((err) => console.error(err));
 };
 
 //Search-Nav
 const searchURLUpdate = () => {
+  containerComicInfo.classList.add("is-hidden");
+  containerCharacterInfo.classList.add("is-hidden");
+  containerComics.classList.remove("is-hidden");
   total = undefined;
   offset = 0;
   input = searchInput.value;
@@ -150,16 +165,10 @@ const searchURLUpdate = () => {
   order = searchOrder.value;
 
   if (type === "comics") {
-    containerComicInfo.classList.add("is-hidden");
-    containerCharacterInfo.classList.add("is-hidden");
-    containerComics.classList.remove("is-hidden");
     fetchData(input, order);
   }
 
   if (type === "characters") {
-    containerComicInfo.classList.add("is-hidden");
-    containerCharacterInfo.classList.add("is-hidden");
-    containerComics.classList.remove("is-hidden");
     fetchCharacters(input, order);
   }
   pageNumber = 1;
