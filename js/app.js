@@ -14,11 +14,17 @@ const mainContainer = document.getElementById("main-container");
 const containerComicInfo = document.getElementById("container-comic-info");
 const comicInfo = document.getElementById("comic-info");
 const comicCharactersInfo = document.getElementById("comic-characters-info");
-const comicCharactersResults = document.getElementById("comic-characters-results");
-const containerCharacterInfo = document.getElementById("container-character-info");
+const comicCharactersResults = document.getElementById(
+  "comic-characters-results"
+);
+const containerCharacterInfo = document.getElementById(
+  "container-character-info"
+);
 const characterInfo = document.getElementById("character-info");
 const characterComicsInfo = document.getElementById("character-comics-info");
-const characterComicsResults = document.getElementById("character-comics-results");
+const characterComicsResults = document.getElementById(
+  "character-comics-results"
+);
 const lightButton = document.getElementById("light-button");
 const darkButton = document.getElementById("dark-button");
 
@@ -42,8 +48,11 @@ let type = searchType.value;
 // General search of comics and characters
 
 const fetchData = (input, order) => {
-  contanierSpinner.classList.remove('is-hidden');
-  mainContainer.classList.add('is-hidden')
+  containerCharacterInfo.classList.add("is-hidden");
+  containerComicInfo.classList.add("is-hidden");
+  containerComics.classList.remove("is-hidden");
+  contanierSpinner.classList.remove("is-hidden");
+  mainContainer.classList.add("is-hidden");
   total = undefined;
   let url;
   if (input !== "") {
@@ -63,8 +72,8 @@ const fetchData = (input, order) => {
 };
 
 const fetchCharacters = (input, order) => {
-  contanierSpinner.classList.remove('is-hidden');
-  mainContainer.classList.add('is-hidden');
+  contanierSpinner.classList.remove("is-hidden");
+  mainContainer.classList.add("is-hidden");
   total = undefined;
 
   let url;
@@ -80,7 +89,6 @@ const fetchCharacters = (input, order) => {
       total = obj.data.total;
       totalResult.innerHTML = total;
       contanierSpinner.classList.add("is-hidden");
-
     })
     .catch((err) => console.error(err));
 };
@@ -177,7 +185,7 @@ const searchURLUpdate = () => {
 searchBtn.addEventListener("click", searchURLUpdate);
 
 searchType.addEventListener("change", () => {
-  const type = searchType.value;
+  type = searchType.value;
   if (type === "comics") {
     searchOrder.innerHTML = `
         <option value='title'>A/Z</option>
@@ -227,15 +235,20 @@ const lastPage = (func) => {
   return offset;
 };
 
-// function loader(action) {
-//     if (action === 'show') {
-//         document.getElementById("loader").style.display = "";
-//         document.getElementById("cover-spin").style.display = "";
-//     } else {
-//         document.getElementById("loader").style.display = "none";
-//         document.getElementById("cover-spin").style.display = "none";
-//     }
-// }
+const mainPage = () => {
+  order = "title";
+  offset = 0;
+  fetchData(input, order);
+  pageNumber = 1;
+  searchType.value = "comics";
+  type = searchType.value;
+  searchOrder.innerHTML = `
+        <option value='title'>A/Z</option>
+        <option value='-title'>Z/A</option>
+        <option value='-focDate'>Más nuevos</option>
+        <option value='focDate'>Más viejos</option> 
+        `;
+};
 
 window.onload = () => {
   fetchData(input, order);
