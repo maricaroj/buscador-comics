@@ -12,6 +12,9 @@ darkButton.addEventListener("click", () => {
 });
 
 const printData = (arr) => {
+  containerCharacterInfo.classList.add("is-hidden");
+  containerComicInfo.classList.add("is-hidden");
+  mainContainer.classList.remove("is-hidden");
   let box = "";
   arr.forEach((comic) => {
     const {
@@ -24,9 +27,9 @@ const printData = (arr) => {
     const pathNonFoundWanted =
       "https://i.pinimg.com/564x/6d/af/a0/6dafa08555ee450d9d61061c7bc23cb5";
     box += `
-        <div class="column is-one-fifth" onclick="getId(${id})">
-            <figure>
-                <a>
+        <div class="column is-full-mobile is-one-third-tablet is-one-fifth-desktop centrar" onclick="getId(${id})">
+            <figure class="blue">
+                <a class="centrar green">
                     <img class="height_img" src="${
                       path === pathNonFoundNowanted ? pathNonFoundWanted : path
                     }.${extension}" alt="${title}">
@@ -115,6 +118,7 @@ const printInfoComic = (arr) => {
 };
 
 const printCharactersComic = (arr, containerText, container) => {
+  container.classList.remove("is-hidden");
   if (arr.length === 0) {
     containerText.innerHTML = `
             <h3 class="title mb-2 title-color">Personajes</h3>
@@ -136,7 +140,7 @@ const printCharactersComic = (arr, containerText, container) => {
     containerText.innerHTML = `
                 <h3 class="title mb-2 title-color">Personajes</h3>
                 <p class="is-size-6 has-text-weight-bold mt-0">${arr.length} Resultado(s)</p>`;
-    box += `<div class="column is-one-fifth" onclick="getCharacterId(${id})">
+    box += `<div class="column is-full-mobile is-one-third-tablet is-one-fifth-desktop centrar" onclick="getCharacterId(${id})">
                     <div class="card-character" data-title="Character" >
                         <img src="${
                           path === pathNonFoundNowanted
@@ -224,6 +228,7 @@ const printInfoCharater = (arr) => {
 };
 
 const printComicsCharacter = (arr) => {
+  characterComicsInfo.classList.remove('is-hidden');
   let box = "";
   arr.forEach((comic) => {
     const {
@@ -237,9 +242,9 @@ const printComicsCharacter = (arr) => {
       "https://i.pinimg.com/564x/6d/af/a0/6dafa08555ee450d9d61061c7bc23cb5";
 
     box += `
-        <div class="column is-one-fifth" onclick="getId(${id})">
-            <figure>
-                <a>
+        <div class="column is-full-mobile is-one-third-tablet is-one-fifth-desktop centrar" onclick="getId(${id})">
+            <figure class="blue">
+                <a class="centrar green">
                     <img class="height_img" src="${
                       path === pathNonFoundNowanted ? pathNonFoundWanted : path
                     }.${extension}" alt="${title}">
