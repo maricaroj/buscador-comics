@@ -40,7 +40,7 @@ const printData = (arr) => {
   });
   mainContainer.innerHTML = box;
   containerPagination.innerHTML = `
-            <button id="first-page-btn" class="button button mr-3 is-primary" ${
+            <button id="first-page-btn" class="button button mr-3 is-danger" ${
               offset === 0 && "disabled"
             } onclick="firstPage(${() => fetchData(input, order)})">
                 <i class="fas fa-caret-square-left is-size-4"></i>
@@ -58,7 +58,7 @@ const printData = (arr) => {
             } onclick="nextPage(${() => fetchData(input, order)})">
                 <i class="fas fa-caret-right is-size-4"></i>
             </button>
-            <button id="last-page-btn" class="button ml-3 is-primary" ${
+            <button id="last-page-btn" class="button ml-3 is-danger" ${
               offset === total - (total % 20) && "disabled"
             } onclick="lastPage(${() => fetchData(input, order)})">
                 <i class="fas fa-caret-square-right is-size-4"></i>
@@ -154,7 +154,7 @@ const printCharactersComic = (arr, containerText, container) => {
   });
   container.innerHTML = box;
   containerPagination.innerHTML = `
-            <button id="first-page-btn" class="button button mr-3 is-danger" ${
+            <button id="first-page-btn" class="button button mr-3 is-primary" ${
               offset === 0 && "disabled"
             } onclick="firstPage(${() => fetchCharacters(input, order)})">
                 <i class="fas fa-caret-square-left is-size-4"></i>
@@ -172,7 +172,7 @@ const printCharactersComic = (arr, containerText, container) => {
             } onclick="nextPage(${() => fetchCharacters(input, order)})">
                 <i class="fas fa-caret-right is-size-4"></i>
             </button>
-            <button id="last-page-btn" class="button ml-3 is-danger" ${
+            <button id="last-page-btn" class="button ml-3 is-primary" ${
               offset === total - (total % 20) && "disabled"
             } onclick="lastPage(${() => fetchCharacters(input, order)})">
                 <i class="fas fa-caret-square-right is-size-4"></i>
